@@ -1,0 +1,48 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0" version="26.0.14">
+  <diagram name="Page-1" id="h4upQ5qsLf-xtyjLLCG9">
+    <mxGraphModel dx="1426" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-5" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="220" width="270" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0Mp3OHuTS5Sdcgw1tyDx-1" target="0Mp3OHuTS5Sdcgw1tyDx-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-13" value="Send Email" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="0Mp3OHuTS5Sdcgw1tyDx-12">
+          <mxGeometry x="-0.0132" y="-2" relative="1" as="geometry">
+            <mxPoint x="-5" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-1" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/identity/App_Registrations.svg;" vertex="1" parent="1">
+          <mxGeometry x="180" y="273" width="63" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-2" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/other/Azure_Communication_Services.svg;" vertex="1" parent="1">
+          <mxGeometry x="470" y="280" width="68" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0Mp3OHuTS5Sdcgw1tyDx-3" target="0Mp3OHuTS5Sdcgw1tyDx-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0Mp3OHuTS5Sdcgw1tyDx-3" target="0Mp3OHuTS5Sdcgw1tyDx-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-3" value="Managed Identity" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Managed_Identities.svg;" vertex="1" parent="1">
+          <mxGeometry x="485" y="490" width="38" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-4" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/general/Resource_Groups.svg;" vertex="1" parent="1">
+          <mxGeometry x="300" y="180" width="68" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0Mp3OHuTS5Sdcgw1tyDx-6" target="0Mp3OHuTS5Sdcgw1tyDx-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0Mp3OHuTS5Sdcgw1tyDx-6" target="0Mp3OHuTS5Sdcgw1tyDx-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0Mp3OHuTS5Sdcgw1tyDx-6" value="Sending Email Role" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/intune/Azure_AD_Roles_and_Administrators.svg;" vertex="1" parent="1">
+          <mxGeometry x="350" y="400" width="54" height="54" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

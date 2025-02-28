@@ -1,3 +1,17 @@
+---
+page_type: sample
+languages:
+- azdeveloper
+- bicep
+- powershell
+products:
+- azure-communication-services
+urlFragment: acs-email-relay
+name: Azure Communication Services as a central email relay
+description: Send all your emails through usage of Azure Communication Services
+---
+<!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
+
 # Azure Communication Services (ACS) Email Sample
 
 This project demonstrates how to set up and use Azure Communication Services (ACS) for sending emails from your applications. ACS Email provides a reliable, scalable email delivery service that integrates with your Azure ecosystem, allowing you to send transactional emails without managing your own email infrastructure.
@@ -9,6 +23,9 @@ Azure Communication Services Email capabilities allow you to:
 - Track email delivery statistics
 - Use custom domains for sending emails
 - Integrate email communications into your applications
+
+## Architecture
+![acs-email-relay-architecture](/docs/images/acs-relay-sample-architecture.png)
 
 ## Prerequisites
 
