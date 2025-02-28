@@ -2,20 +2,17 @@
 # To learn more about the azure.yaml file, visit https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-schema
 
 # Name of the application.
-name: azd-starter
-infra:
-  provider: bicep
-  path: infra
-  hooks:
-    pre-provision:
-      windows:
-        shell: pwsh
-        run: ./scripts/appreg.ps1
-        interactive: true
-        continueOnError: false
-    pre-destroy:
-      windows:
-        shell: pwsh
-        run: ./scripts/cleanup.ps1
-        interactive: true
-        continueOnError: false
+name: acs-email-relay-quickstart
+requiredVersions:
+  azd: ">= 1.10.0"
+hooks:
+  preprovision:
+    shell: pwsh
+    run: ./scripts/appreg.ps1
+    interactive: true
+    continueOnError: false
+  postdown:
+    shell: pwsh
+    run: ./scripts/cleanup.ps1
+    interactive: true
+    continueOnError: false

@@ -27,3 +27,4 @@ output domainName string = managedDomain.name
 output domainId string = managedDomain.id
 output emailServiceId string = emailService.id
 output emailServiceName string = emailService.name
+output fromSenderDomain string = managedDomain.properties.fromSenderDomain

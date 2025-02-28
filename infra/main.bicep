@@ -98,3 +98,7 @@ module roleAssignment './role-assignment.bicep' = {
 
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
+output DOMAIN_NAME string = emailService.outputs.domainName
+output FROM_SENDER_DOMAIN string = emailService.outputs.fromSenderDomain
+output ACS_ID string = acs.outputs.communicationServiceId
+output ACS_NAME string = acs.outputs.communicationServiceName

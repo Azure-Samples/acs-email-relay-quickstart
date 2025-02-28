@@ -33,12 +33,7 @@ Before you begin, ensure you have the following:
 
 1. **Azure Developer CLI (azd)**: This tool helps you manage your Azure resources and deployments. Install it by following the instructions [here](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd).
 
-2. **Azure App Registration**: You need to register an application in Azure Active Directory to authenticate and authorize your application. Follow the steps [here](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to create an app registration. Make sure to:
-   - Set the appropriate permissions for sending emails
-   - Create a client secret and save it securely
-   - Note your Application (client) ID and Directory (tenant) ID
-
-3. **PowerShell 7+**: For running the email sending scripts. You can download it from [here](https://github.com/PowerShell/PowerShell).
+2. **PowerShell 7+**: For running the email sending scripts, as well as some of the scripting used to create an app registration. You can download it from [here](https://github.com/PowerShell/PowerShell).
 
 ## Getting Started
 
@@ -58,43 +53,47 @@ Before you begin, ensure you have the following:
    azd up
    ```
    This command will:
+   - Create an app registration
+   - Create and store a client secret for the app registration
    - Create an Azure Communication Services resource
    - Configure the email service
    - Set up necessary connections and permissions
 
 4. After deployment completes, note the following from the output:
    - Communication Services resource name
-   - Connection string or access keys (store these securely)
+   - App registration ID
+   - App registration tenant ID
+   - Client secret (securely stored in the azd environment as AZURE_APP_REGISTRATION_CLIENT_SECRET)
 
 ## Usage
 
 ### Important Note About Sender Email Address
 
-When sending emails through ACS, you must use the Azure-managed domain that was assigned to your service. The sender email address will be in the format:
-`DoNotReply@{your-domain}.azurecomm.net`
-
-You can find your assigned domain in the Azure Portal under your Email Communication Service resource in the "Domains" section, or by checking the output after running `azd up`.
+When sending emails through ACS, you must use the Azure-managed domain that was assigned to your service. All required configuration values are stored in your azd environment variables after deployment.
 
 ### Sending Emails with PowerShell
 
-After deployment, you can use PowerShell to send emails through ACS:
+After deployment, you can use PowerShell to send emails through ACS. All required values are stored in your azd environment:
 
 ```powershell
+# Get the environment variables from azd
+$azdenv = azd env get-values --output json | ConvertFrom-Json
+
 # Set up credentials for SMTP authentication
-$Password = ConvertTo-SecureString -AsPlainText -Force -String 'YOUR_ENTRA_APPLICATION_CLIENT_SECRET'
-$Cred = New-Object -TypeName PSCredential -ArgumentList 'YOUR_ACS_RESOURCE_NAME|YOUR_ENTRA_APP_ID|YOUR_ENTRA_TENANT_ID', $Password
+$Password = ConvertTo-SecureString -AsPlainText -Force -String $azdenv.AZURE_APP_REGISTRATION_CLIENT_SECRET
+$Cred = New-Object -TypeName PSCredential -ArgumentList "$($azdenv.ACS_NAME)|$($azdenv.AZURE_APP_REGISTRATION_CLIENT_ID)|$($azdenv.AZURE_TENANT_ID)", $Password
 
 # Send a simple email
-Send-MailMessage -From 'DoNotReply@{your-domain}.azurecomm.net' -To 'recipient@example.com' -Subject 'Test mail' -Body 'This is a test email from Azure Communication Services' -SmtpServer 'smtp.azurecomm.net' -Port 587 -Credential $Cred -UseSsl
+Send-MailMessage -From "DoNotReply@$($azdenv.FROM_SENDER_DOMAIN)" -To 'recipient@example.com' -Subject 'Test mail' -Body 'This is a test email from Azure Communication Services' -SmtpServer 'smtp.azurecomm.net' -Port 587 -Credential $Cred -UseSsl
 
 # Send an email with HTML content
-Send-MailMessage -From 'DoNotReply@{your-domain}.azurecomm.net' -To 'recipient@example.com' -Subject 'HTML Test mail' -BodyAsHtml -Body '<h1>Hello</h1><p>This is an <strong>HTML</strong> email.</p>' -SmtpServer 'smtp.azurecomm.net' -Port 587 -Credential $Cred -UseSsl
+Send-MailMessage -From "DoNotReply@$($azdenv.FROM_SENDER_DOMAIN)" -To 'recipient@example.com' -Subject 'HTML Test mail' -BodyAsHtml -Body '<h1>Hello</h1><p>This is an <strong>HTML</strong> email.</p>' -SmtpServer 'smtp.azurecomm.net' -Port 587 -Credential $Cred -UseSsl
 
 # Send an email with attachments
-Send-MailMessage -From 'DoNotReply@{your-domain}.azurecomm.net' -To 'recipient@example.com' -Subject 'Email with attachment' -Body 'Please see the attached document.' -Attachments 'path/to/your/file.pdf' -SmtpServer 'smtp.azurecomm.net' -Port 587 -Credential $Cred -UseSsl
+Send-MailMessage -From "DoNotReply@$($azdenv.FROM_SENDER_DOMAIN)" -To 'recipient@example.com' -Subject 'Email with attachment' -Body 'Please see the attached document.' -Attachments 'path/to/your/file.pdf' -SmtpServer 'smtp.azurecomm.net' -Port 587 -Credential $Cred -UseSsl
 ```
 
-Replace `{your-domain}` with your assigned Azure-managed domain (e.g., `5fe59b40-6423-402a-b23b-8179dc262ea4`).
+Note: Simply replace 'recipient@example.com' with your desired recipient email address.
 
 ### Using in Applications
 

@@ -26,3 +26,6 @@ resource communicationService 'Microsoft.Communication/communicationServices@202
     ]
   }
 }
+
+output communicationServiceId string = communicationService.id
+output communicationServiceName string = communicationService.name

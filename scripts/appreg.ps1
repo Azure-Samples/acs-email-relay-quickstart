@@ -15,6 +15,7 @@ if ($? -eq $true) {
     # Create a display name for the app registration based on the environment name
     $displayName = "ACS-Email-Relay-" + $azdenv.AZURE_ENV_NAME
     $app = az ad app list --display-name $displayName --output json | ConvertFrom-Json
+    $createSecret = $true
 
     if (!$app) {
         Write-Host "Creating new app registration $displayName..."
@@ -57,6 +58,25 @@ if ($? -eq $true) {
             azd env set AZURE_APP_REGISTRATION_PRINCIPAL_ID $sp.id
             azd env set AZURE_APP_REGISTRATION_CLIENT_ID $app.appId
         }
+    }
+
+    # Create a client secret that expires in 30 days
+    $endDate = (Get-Date).AddDays(30).ToString("yyyy-MM-dd")
+    
+    # Create the client secret
+    $secret = az ad app credential reset --id $app.appId --display-name "ACS-Email-Relay-Secret" --end-date $endDate --append --output json | ConvertFrom-Json
+    
+    if ($secret) {
+        Write-Host "Created new client secret for app registration"
+        Write-Host "Secret Value: $($secret.password)"
+        Write-Host "Please store this secret value securely as it cannot be retrieved later"
+        Write-Host "This secret will expire on: $endDate"
+        
+        # Store the secret in the azd environment
+        azd env set AZURE_APP_REGISTRATION_CLIENT_SECRET $secret.password
+    } else {
+        Write-Error "Failed to create client secret"
+        exit 1
     }
 }
 else {
